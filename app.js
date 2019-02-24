@@ -21,7 +21,7 @@ const reviews   = require('./routes/reviews');
 const app = express();
 
 // connect to the database
-mongoose.connect('mongodb://localhost:27017/surf-shop', { useNewUrlParser: true });
+mongoose.connect('mongodb://localhost:27017/surf-shop-mapbox', { useNewUrlParser: true });
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', () => {
@@ -31,6 +31,8 @@ db.once('open', () => {
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+// set public assets directory
+app.use(express.static('public'));
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(push.join(__dirname, 'public', 'favicon.ico')));
