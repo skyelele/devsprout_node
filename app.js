@@ -63,6 +63,12 @@ passport.serializeUser(User.serializeUser());
 //      PASSPORT      ||    PASSPORT-LOCAL-MONGOOSE
 passport.deserializeUser(User.deserializeUser());
 
+// set title middleware
+app.use(function(req, res, next) {
+  res.locals.title = 'Surf Shop';
+  next();
+});
+
 // Mount routes
 app.use('/', index);
 app.use('/posts', posts);
@@ -70,7 +76,9 @@ app.use('/posts/:id/reviews', reviews);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  next(createError(404));
+  const err = new Error('Not Found');
+  err.status = 404;
+  next(err);
 });
 
 // error handler
@@ -83,5 +91,6 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
 
 module.exports = app;
