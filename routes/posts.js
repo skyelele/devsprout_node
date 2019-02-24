@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const multer = require('multer');
-// where files are stored temp. before upload to cloud
 const upload = multer({'dest': 'uploads/'});
 const { asyncErrorHandler } = require('../middleware');
 const { 
@@ -34,6 +33,7 @@ router.put('/:id', asyncErrorHandler(postUpdate));
 
 /* DELETE posts destroy /posts/:id */
 router.delete('/:id', asyncErrorHandler(postDestroy));
+
 
 module.exports = router;
 
