@@ -1,6 +1,5 @@
 require('dotenv').config();
 
-const createError = require('http-errors');
 const express = require('express');
 const engine = require('ejs-mate');
 const path = require('path');
@@ -23,7 +22,7 @@ const app = express();
 
 // connect to the database
 mongoose.connect('mongodb://localhost:27017/surf-shop', { useNewUrlParser: true });
-var db = mongoose.connection;
+const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', () => {
   // we're connected!
@@ -38,8 +37,8 @@ app.set('view engine', 'ejs');
 app.use(express.static('public'));
 
 // uncomment after placing your favicon in /public
-//app.use(favicon(push.join(__dirname, 'public', 'favicon.ico')));
-app.use(logger('dev')); 
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
